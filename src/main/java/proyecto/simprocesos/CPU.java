@@ -8,6 +8,7 @@ public class CPU {
     public CPU(int ciclos) {
         this.ciclos = ciclos;
     }
+
     public int getCiclos() {
         return ciclos;
     }

@@ -1,15 +1,24 @@
 package proyecto.simprocesos;
 
 public class proceso {
-  private int prioridad, tejecucion, trestante;
+  private int ID, prioridad, tejecucion, trestante;
   private String nom;
   public proceso(){}
-  public proceso(int prioridad, int tejecucion, int trestante, String nom){
+  public proceso(int ID, int prioridad, int tejecucion, int trestante, String nom){
       this.prioridad=prioridad;
       this.tejecucion=tejecucion;
       this.trestante=trestante;
       this.nom=nom;
+      this.ID=ID;
   }
+    public int getID() {
+        return ID;
+    }
+
+    public void setID(int ID) {
+        this.ID = ID;
+    }
+  
     public int getPrioridad() {
         return prioridad;
     }
@@ -47,8 +56,10 @@ public class proceso {
   public boolean terminado(){
           return trestante<=0; 
 }
+  
   public String toString(){
       return "Proceso: "+ nom + 
+             "ID: "+ ID +
              "| Tiempo restante: " + trestante +
              "|Prioridad: "+ prioridad
               ;

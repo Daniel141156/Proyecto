@@ -1,5 +1,6 @@
 package proyecto.simprocesos;
 import com.murcia.utils.*;
+import java.util.HashSet;
 public class SimProcesos {
     private static ColaEnlazada<proceso> colaProcesos;
     private static ColaEnlazada<proceso> procesosTerminados;
@@ -47,11 +48,18 @@ public class SimProcesos {
         
         String nombre = Input.nextLine("Nombre del proceso: ");
         int tiempo = Input.nextInt("Tiempo para completar la ejecución: ");
-
+        int prioridad = Input.nextInt("Prioridad: 1->Alta. 2->Baja.");
+        do{
+        if(prioridad!=1 || prioridad!=2){
+            System.out.println("Ingrese un valor válido.");
+        }
+        }while(prioridad!=1 || prioridad!=2);
         proceso p = new proceso();//se crea el objeto para proceso
         p.setNom(nombre);
         p.setTejecucion(tiempo);
         p.setTrestante(tiempo);
+        p.setPrioridad(prioridad);
+        
 
         colaProcesos.encolar(p);
 
