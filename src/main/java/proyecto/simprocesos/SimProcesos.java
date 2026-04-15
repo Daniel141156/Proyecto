@@ -6,7 +6,7 @@ public class SimProcesos {
     private static ColaEnlazada<proceso> procesosTerminados;
     private static estadistica stats = new estadistica();
     private static CPU cpu = new CPU();
-    private static int ID;
+    private static int ID=1;
     public static void main(String[] args) {
         //opciones menu
         final char salir = '7';
@@ -48,12 +48,13 @@ public class SimProcesos {
         
         String nombre = Input.nextLine("Nombre del proceso: ");
         int tiempo = Input.nextInt("Tiempo para completar la ejecución: ");
-        int prioridad = Input.nextInt("Prioridad: 1->Alta. 2->Baja.");
+        int prioridad = Input.nextInt("Prioridad: 1->Alta. 2->Baja:");
         do{
-        if(prioridad!=1 || prioridad!=2){
+        if(prioridad!=1 && prioridad!=2){
             System.out.println("Ingrese un valor válido.");
+            prioridad = Input.nextInt("Prioridad: 1->Alta. 2->Baja:");
         }
-        }while(prioridad!=1 || prioridad!=2);
+        }while(prioridad!=1 && prioridad!=2);
         proceso p = new proceso();//se crea el objeto para proceso
         p.setNom(nombre);
         p.setTejecucion(tiempo);
@@ -65,7 +66,7 @@ public class SimProcesos {
 
         System.out.println("Proceso agregado a la cola de procesos.");
         stats.setCantProcesos(stats.getCantProcesos() + 1);
-        p.setID(ID+1);
+        p.setID(ID++);
         }
     
     
