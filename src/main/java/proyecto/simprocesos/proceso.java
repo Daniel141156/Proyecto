@@ -45,12 +45,12 @@ public class proceso {
       trestante--;
   }
   public boolean terminado(){
-      if(trestante>0){
-      return false;
-              }else
-          return true; 
+          return trestante<=0; 
 }
   public String toString(){
-      return "Proceso: "+ nom + "| Tiempo restante: " + trestante;
+      return "Proceso: "+ nom + 
+             "| Tiempo restante: " + trestante +
+             "|Prioridad: "+ prioridad
+              ;
   }
 }
