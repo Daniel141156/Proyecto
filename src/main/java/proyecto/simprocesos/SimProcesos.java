@@ -5,6 +5,7 @@ public class SimProcesos {
     private static ColaEnlazada<proceso> procesosTerminados;
     private static estadistica stats = new estadistica();
     private static CPU cpu = new CPU();
+    private static int ID;
     public static void main(String[] args) {
         //opciones menu
         final char salir = '7';
@@ -56,7 +57,8 @@ public class SimProcesos {
 
         System.out.println("Proceso agregado a la cola de procesos.");
         stats.setCantProcesos(stats.getCantProcesos() + 1);
-    }
+        p.setID(ID+1);
+        }
     
     
     public static void ejecutarCiclo(){
