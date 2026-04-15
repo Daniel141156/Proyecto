@@ -70,7 +70,7 @@ public class SimProcesos {
         }
     
     
-    public static void ejecutarCiclo(){
+    public static void ejecutarCiclo(){//no esta funcionando correctamente
         
         int n = Input.nextInt("Cuantos Ciclos ejecutar?:");
         for(int i=0;i<n;i++){
@@ -81,7 +81,7 @@ public class SimProcesos {
         cpu.avanzarCiclo();
         proceso actual = colaProcesos.desencolar();
         actual.ejecutarCiclo();
-        System.out.println("Ejecutando: " + actual);
+        // System.out.println("Ejecutando: " + actual); <---esto ensucia mucho el output 
         if (!actual.terminado()) {
             //colaProcesos.encolar(actual);, se busca añadir la prioridad si es alta(1) o baja(2)
             if(actual.getPrioridad()==1){
@@ -106,14 +106,16 @@ public class SimProcesos {
             }
         }
     }
+        System.out.println("------RESUMEN-------");
         System.out.println("Se ejecutaron "+n+" ciclos.");
         System.out.println("Ciclos totales CPU: "+cpu.getCiclos());
+        System.out.println("Procesos en cola: "+ colaProcesos.size());
     }
     
     
     public static void mostrarTerminados(){
         if (procesosTerminados == null) {
-        System.out.println("No hay procesos terminados.");
+        System.out.println("No hay procesos en la cola.");
         return;
     }else{
         System.out.println("Procesos terminados:");
@@ -122,9 +124,11 @@ public class SimProcesos {
     }
     public static void mostrarCola(){
         if(colaProcesos == null||colaProcesos.size()==0){
-            System.out.println("Cola vacía.");
+            System.out.println("No hay procesos en la cola.");
             return;
         }
+            System.out.println("-------PROCESOS EN COLA-------");
+            System.out.println("------------------------------");
             System.out.println(colaProcesos);
         }
     
