@@ -2,14 +2,17 @@ package proyecto.simprocesos;
 import com.murcia.utils.*;
 public class SimProcesos {
     private static ColaEnlazada<proceso> colaProcesos;
+    private static ColaEnlazada<proceso> procesosTerminados;
     public static void main(String[] args) {
         //opciones menu
-        final char salir = '4';
+        final char salir = '6';
         String[] opciones = {
             "1-Crear proceso.",
             "2-Ejecutar ciclo.",
             "3-Ver cola.",
-            "4-Salir."
+            "4-Ver terminados.",
+            "5-Ver estadísticas.",
+            "6-Salir."
         };
         //creacion de objeto menu
         Menu menu = new Menu(opciones,'V' , "", "simulador CPU");
@@ -17,11 +20,13 @@ public class SimProcesos {
         do{
             Consola.clrscr();
             Consola.gotoxy(0, 0);
-            opcion = menu.select("Opcion[1-4]: ");
+            opcion = menu.select("Opcion[1-6]: ");
             Input.nextLine("");//opcion para reemplazar el scanner
             if (opcion == '1') crearProceso();
-            if (opcion == '2'); //ejecutarCiclo();<--pendiente
-            if (opcion == '3'); //mostrarCola();<--pendiente
+            if (opcion == '2') ejecutarCiclo();
+            if (opcion == '3') mostrarCola();
+            if (opcion == '4') mostrarTerminados();
+            if (opcion == '5') mostrarEstadisticas();
          } while(opcion != salir);
         //mostrarEstadisticas();<--pendiente 
     }
@@ -59,18 +64,42 @@ public class SimProcesos {
         if (!actual.terminado()) {
             colaProcesos.encolar(actual);
         } else {
-            System.out.println("Proceso terminado.");
+            if(procesosTerminados ==null){
+                procesosTerminados = new ColaEnlazada<>();
+        }
+           procesosTerminados.encolar(actual);
+            System.out.println("Proceso terminado: " + actual);
+        }
+    }
+    public static void mostrarTerminados(){
+        if (procesosTerminados == null) {
+        System.out.println("No hay procesos terminados.");
+        return;
+    }else{
+        System.out.println("Procesos terminados:");
+        System.out.println(procesosTerminados); 
         }
     }
     public static void mostrarCola(){
-        if(colaProcesos == null){
+        if(colaProcesos == null||colaProcesos.size()==0){
             System.out.println("Cola vacía.");
             return;
         }
             System.out.println(colaProcesos);
         }
     public static void mostrarEstadisticas(){
-        
+       int terminados = 0, enCola=0;
+    if (procesosTerminados != null) {
+        terminados = procesosTerminados.size();
+    }
+    if (colaProcesos != null) {
+        enCola = colaProcesos.size();
+    } 
+        System.out.println("----------ESTADÍSTICAS----------");
+        System.out.println("Procesos terminados: " + terminados);
+        System.out.println("Procesos en cola: "+ enCola);
+        int total = terminados + enCola;
+        System.out.println("Total:" + total);
     }
     
 }
